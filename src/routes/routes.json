@@ -1,0 +1,546 @@
+[
+ {
+   "route_id": "1-VIC",
+   "route_short_name": "1",
+   "route_long_name": "South Oak Bay / Downtown",
+   "route_type": 3,
+   "route_color": "004B8D",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "2-VIC",
+   "route_short_name": "2",
+   "route_long_name": "James Bay / South Oak Bay",
+   "route_type": 3,
+   "route_color": "8CC63F",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "3-VIC",
+   "route_short_name": "3",
+   "route_long_name": "James Bay / Royal Jubilee",
+   "route_type": 3,
+   "route_color": "F37421",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "4-VIC",
+   "route_short_name": "4",
+   "route_long_name": "UVic / Downtown via Hillside",
+   "route_type": 3,
+   "route_color": "00AEEF",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "5-VIC",
+   "route_short_name": "5",
+   "route_long_name": "James Bay / Willows",
+   "route_type": 3,
+   "route_color": "8177B7",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "6-VIC",
+   "route_short_name": "6",
+   "route_long_name": "Royal Oak Exch / Downtown via Royal Oak Centre",
+   "route_type": 3,
+   "route_color": "FCAF17",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "7-VIC",
+   "route_short_name": "7",
+   "route_long_name": "UVic / Downtown via Fairfield",
+   "route_type": 3,
+   "route_color": "00AA47",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "8-VIC",
+   "route_short_name": "8",
+   "route_long_name": "Interurban / Tillicum Centre / Oak Bay",
+   "route_type": 3,
+   "route_color": "ED1D8F",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "9-VIC",
+   "route_short_name": "9",
+   "route_long_name": "Royal Oak Exch / UVic",
+   "route_type": 3,
+   "route_color": "8177B7",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "10-VIC",
+   "route_short_name": "10",
+   "route_long_name": "James Bay / Royal Jubilee",
+   "route_type": 3,
+   "route_color": "49176B",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "11-VIC",
+   "route_short_name": "11",
+   "route_long_name": "Tillicum Centre / UVic",
+   "route_type": 3,
+   "route_color": "B2BB1E",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "12-VIC",
+   "route_short_name": "12",
+   "route_long_name": "University Heights / UVic",
+   "route_type": 3,
+   "route_color": "4F6F19",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "14-VIC",
+   "route_short_name": "14",
+   "route_long_name": "Vic General / UVic",
+   "route_type": 3,
+   "route_color": "E270AB",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "15-VIC",
+   "route_short_name": "15",
+   "route_long_name": "Esquimalt / UVic",
+   "route_type": 3,
+   "route_color": "5D87A1",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "17-VIC",
+   "route_short_name": "17",
+   "route_long_name": "Cedar Hill",
+   "route_type": 3,
+   "route_color": "F49A5D",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "6A-VIC",
+   "route_short_name": "6A",
+   "route_long_name": "Royal Oak Exch / Downtown via Emily Carr",
+   "route_type": 3,
+   "route_color": "FCAF17",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "6B-VIC",
+   "route_short_name": "6B",
+   "route_long_name": "Royal Oak Exch / Downtown via Chatterton",
+   "route_type": 3,
+   "route_color": "FCAF17",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "7N-VIC",
+   "route_short_name": "7N",
+   "route_long_name": "UVic / Downtown via Cook Street Vlg Night Route",
+   "route_type": 3,
+   "route_color": "00AA47",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "21N-VIC",
+   "route_short_name": "21N",
+   "route_long_name": "Interurban Night Route",
+   "route_type": 3,
+   "route_color": "B3AA7E",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "21-VIC",
+   "route_short_name": "21",
+   "route_long_name": "Interurban / Downtown",
+   "route_type": 3,
+   "route_color": "B3AA7E",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "22-VIC",
+   "route_short_name": "22",
+   "route_long_name": "Vic General / Hillside Centre",
+   "route_type": 3,
+   "route_color": "BF83B9",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "22A-VIC",
+   "route_short_name": "22A",
+   "route_long_name": "Vic General / Hillside Centre via Strawberry Vale",
+   "route_type": 3,
+   "route_color": "BF83B9",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "24-VIC",
+   "route_short_name": "24",
+   "route_long_name": "Cedar Hill / Tillicum Centre",
+   "route_type": 3,
+   "route_color": "A54499",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "25-VIC",
+   "route_short_name": "25",
+   "route_long_name": "Maplewood / Tillicum Centre",
+   "route_type": 3,
+   "route_color": "00B5AD",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "26-VIC",
+   "route_short_name": "26",
+   "route_long_name": "UVic / Dockyard via McKenzie-Tillicum",
+   "route_type": 3,
+   "route_color": "B06E0E",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "27-VIC",
+   "route_short_name": "27",
+   "route_long_name": "Gordon Head / Downtown",
+   "route_type": 3,
+   "route_color": "8E0C3A",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "28-VIC",
+   "route_short_name": "28",
+   "route_long_name": "Majestic / Downtown",
+   "route_type": 3,
+   "route_color": "E31937",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "27X-VIC",
+   "route_short_name": "27X",
+   "route_long_name": "Downtown Express",
+   "route_type": 3,
+   "route_color": "8E0C3A",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "30-VIC",
+   "route_short_name": "30",
+   "route_long_name": "Royal Oak Exch / Downtown",
+   "route_type": 3,
+   "route_color": "AC5C3B",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "31-VIC",
+   "route_short_name": "31",
+   "route_long_name": "Royal Oak Exch / Downtown",
+   "route_type": 3,
+   "route_color": "875D9F",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "32-VIC",
+   "route_short_name": "32",
+   "route_long_name": "Cordova Bay / Royal Oak Exch",
+   "route_type": 3,
+   "route_color": "7C3F25",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "28X-VIC",
+   "route_short_name": "28X",
+   "route_long_name": "Majestic Express",
+   "route_type": 3,
+   "route_color": "E31937",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "70X-VIC",
+   "route_short_name": "70X",
+   "route_long_name": "Swartz Bay / Downtown Express",
+   "route_type": 3,
+   "route_color": "00B5AD",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "35-VIC",
+   "route_short_name": "35",
+   "route_long_name": "Ridge",
+   "route_type": 3,
+   "route_color": "91278F",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "26A-VIC",
+   "route_short_name": "26A",
+   "route_long_name": "UVic / Uptown via Saanich Rd",
+   "route_type": 3,
+   "route_color": "B06E0E",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "76-VIC",
+   "route_short_name": "76",
+   "route_long_name": "Swartz Bay / UVic",
+   "route_type": 3,
+   "route_color": "AC5C3B",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "39-VIC",
+   "route_short_name": "39",
+   "route_long_name": "Interurban / Royal Oak Exch / UVic",
+   "route_type": 3,
+   "route_color": "FFC20E",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "38-VIC",
+   "route_short_name": "38",
+   "route_long_name": "Royal Oak Exch / Westhills Exch",
+   "route_type": 3,
+   "route_color": "B2BB1E",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "40-VIC",
+   "route_short_name": "40",
+   "route_long_name": "UVic / Dockyard via McKenzie-Admirals",
+   "route_type": 3,
+   "route_color": "00B5AD",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "51X-VIC",
+   "route_short_name": "51X",
+   "route_long_name": "Westhills Exch / UVic Express",
+   "route_type": 3,
+   "route_color": "00AA47",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "43-VIC",
+   "route_short_name": "43",
+   "route_long_name": "Royal Roads via Belmont Park",
+   "route_type": 3,
+   "route_color": "004B8D",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "88A-VIC",
+   "route_short_name": "88A",
+   "route_long_name": "Airport / Sidney bypass Sidney Industrial",
+   "route_type": 3,
+   "route_color": "8CC63F",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "46-VIC",
+   "route_short_name": "46",
+   "route_long_name": "Dockyard / Westhills Exch",
+   "route_type": 3,
+   "route_color": "8CC63F",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "47-VIC",
+   "route_short_name": "47",
+   "route_long_name": "Goldstream Meadows / Downtown",
+   "route_type": 3,
+   "route_color": "F37421",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "48-VIC",
+   "route_short_name": "48",
+   "route_long_name": "Happy Valley / Downtown",
+   "route_type": 3,
+   "route_color": "00AEEF",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "49-VIC",
+   "route_short_name": "49",
+   "route_long_name": "Skirt Mountain / Langford Exch",
+   "route_type": 3,
+   "route_color": "4F6F19",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "52-VIC",
+   "route_short_name": "52",
+   "route_long_name": "Colwood Exch / Bear Mountain",
+   "route_type": 3,
+   "route_color": "ED1D8F",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "53-VIC",
+   "route_short_name": "53",
+   "route_long_name": "Vic General / Langford Exch",
+   "route_type": 3,
+   "route_color": "8177B7",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "54-VIC",
+   "route_short_name": "54",
+   "route_long_name": "Metchosin / Langford Exch",
+   "route_type": 3,
+   "route_color": "49176B",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "55-VIC",
+   "route_short_name": "55",
+   "route_long_name": "Happy Valley / Langford Exch",
+   "route_type": 3,
+   "route_color": "B2BB1E",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "57-VIC",
+   "route_short_name": "57",
+   "route_long_name": "Thetis Heights / Langford Exch",
+   "route_type": 3,
+   "route_color": "77AF99",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "58-VIC",
+   "route_short_name": "58",
+   "route_long_name": "Goldstream Meadows / Langford Exch",
+   "route_type": 3,
+   "route_color": "E270AB",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "59-VIC",
+   "route_short_name": "59",
+   "route_long_name": "Triangle Mountain / Langford Exch",
+   "route_type": 3,
+   "route_color": "5D87A1",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "60-VIC",
+   "route_short_name": "60",
+   "route_long_name": "Wishart / Langford Exch",
+   "route_type": 3,
+   "route_color": "0073AE",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "61-VIC",
+   "route_short_name": "61",
+   "route_long_name": "Sooke / Langford / Downtown",
+   "route_type": 3,
+   "route_color": "F49A5D",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "63-VIC",
+   "route_short_name": "63",
+   "route_long_name": "Otter Point",
+   "route_type": 3,
+   "route_color": "B3AA7E",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "64-VIC",
+   "route_short_name": "64",
+   "route_long_name": "Langford Exch / Sooke via E Sooke and Beecher Bay",
+   "route_type": 3,
+   "route_color": "BF83B9",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "65-VIC",
+   "route_short_name": "65",
+   "route_long_name": "Sooke / Downtown via Westhills",
+   "route_type": 3,
+   "route_color": "A54499",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "70-VIC",
+   "route_short_name": "70",
+   "route_long_name": "Swartz Bay / Downtown",
+   "route_type": 3,
+   "route_color": "00B5AD",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "71-VIC",
+   "route_short_name": "71",
+   "route_long_name": "Swartz Bay / Downtown",
+   "route_type": 3,
+   "route_color": "B06E0E",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "72-VIC",
+   "route_short_name": "72",
+   "route_long_name": "Swartz Bay / Downtown",
+   "route_type": 3,
+   "route_color": "8E0C3A",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "75-VIC",
+   "route_short_name": "75",
+   "route_long_name": "Saanichton / Royal Oak / Downtown",
+   "route_type": 3,
+   "route_color": "E31937",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "81-VIC",
+   "route_short_name": "81",
+   "route_long_name": "Saanichton / Sidney / Swartz Bay",
+   "route_type": 3,
+   "route_color": "875D9F",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "83-VIC",
+   "route_short_name": "83",
+   "route_long_name": "Sidney / Brentwood / Royal Oak",
+   "route_type": 3,
+   "route_color": "91278F",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "85-VIC",
+   "route_short_name": "85",
+   "route_long_name": "North Saanich",
+   "route_type": 3,
+   "route_color": "FFC20E",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "87-VIC",
+   "route_short_name": "87",
+   "route_long_name": "Tsawout / Sidney via Airport and Dean Park",
+   "route_type": 3,
+   "route_color": "004B8D",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "88-VIC",
+   "route_short_name": "88",
+   "route_long_name": "Airport / Sidney via Sidney Industrial",
+   "route_type": 3,
+   "route_color": "8CC63F",
+   "route_text_color": "FFFFFF"
+ },
+ {
+   "route_id": "95-VIC",
+   "route_short_name": "95",
+   "route_long_name": "Langford / Downtown Blink",
+   "route_type": 3,
+   "route_color": "FCAF17",
+   "route_text_color": "FFFFFF"
+ }
+]
