@@ -14,10 +14,14 @@
             <p>{route_long_name}</p>
         </div>
         <div class="time-info">
-            {#if wait_time >= 0}
-                <p>{new Date(wait_time).getMinutes()} min</p>
-            {:else}
+            {#if wait_time <= 0}
                 <p>{new Date(Math.abs(wait_time)).getMinutes()} min ago</p>
+            {:else if wait_time <= 60*1000}
+                <p>Now</p>
+            {:else if wait_time/1000/60 >= 60}
+                <p>{new Date(time*1000).getHours()}: {new Date(time*1000).getMinutes()}</p>
+            {:else}
+                <p>{new Date(wait_time).getMinutes()} min</p>
             {/if}
         </div>
     </div>
@@ -60,7 +64,11 @@
 
     .time-info {
         text-align: right;
-        width: 4rem;
+        width: 5rem;
         flex-grow: 0;
+    }
+
+    .time-info p {
+        font-family: sans-serif;
     }
 </style>
