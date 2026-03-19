@@ -1,7 +1,7 @@
 <script>
-    let { route_short_name, route_long_name, route_color, time } = $props();
+    let { route_short_name, trip_headsign, route_color, time } = $props();
 
-    // in seconds
+    // time from the api is in second, not ms, so * 1000 to convert to ms
     let wait_time = $derived(time * 1000 - Date.now());
 </script>
 
@@ -11,15 +11,17 @@
             <p style="background-color: #{route_color};">{route_short_name}</p>
         </div>
         <div class="trip-info">
-            <p>{route_long_name}</p>
+            <p>{trip_headsign}</p>
         </div>
         <div class="time-info">
-            {#if wait_time <= 0}
+            {#if wait_time <= (-60)*60*1000}
+                <p></p>
+            {:else if wait_time <= (-60)*1000}
                 <p>{new Date(Math.abs(wait_time)).getMinutes()} min ago</p>
             {:else if wait_time <= 60*1000}
                 <p>Now</p>
             {:else if wait_time/1000/60 >= 60}
-                <p>{new Date(time*1000).getHours()}: {new Date(time*1000).getMinutes()}</p>
+                <p>{new Date(time*1000).getHours()}:{("0" + (new Date(time*1000).getMinutes())).slice(-2)}</p>
             {:else}
                 <p>{new Date(wait_time).getMinutes()} min</p>
             {/if}
