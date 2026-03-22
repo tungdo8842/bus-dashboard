@@ -14,14 +14,18 @@
             <p>{trip_headsign}</p>
         </div>
         <div class="time-info">
-            {#if wait_time <= (-60)*60*1000}
+            {#if wait_time <= -60 * 60 * 1000}
                 <p></p>
-            {:else if wait_time <= (-60)*1000}
+            {:else if wait_time <= -60 * 1000}
                 <p>{new Date(Math.abs(wait_time)).getMinutes()} min ago</p>
-            {:else if wait_time <= 60*1000}
+            {:else if wait_time <= 60 * 1000}
                 <p>Now</p>
-            {:else if wait_time/1000/60 >= 60}
-                <p>{new Date(time*1000).getHours()}:{("0" + (new Date(time*1000).getMinutes())).slice(-2)}</p>
+            {:else if wait_time / 1000 / 60 >= 60}
+                <p>
+                    {new Date(time * 1000).getHours()}:{(
+                        "0" + new Date(time * 1000).getMinutes()
+                    ).slice(-2)}
+                </p>
             {:else}
                 <p>{new Date(wait_time).getMinutes()} min</p>
             {/if}
@@ -34,11 +38,12 @@
     .trip-container {
         display: flex;
         flex-direction: column;
-        border: 1px solid gray;
         border-radius: 8px;
         margin: 8px;
         max-width: 400px;
         padding: 0px 8px;
+        background-color: #1a1a1a;
+        color: #cccccc;
     }
 
     .first-row {
