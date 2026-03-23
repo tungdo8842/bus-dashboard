@@ -1,5 +1,6 @@
 <script>
-    let { endpoint, stopName, args } = $props();
+    let { endpoint, stopName, args = "" } = $props();
+    import { env } from "$env/dynamic/public";
     import { onMount } from "svelte";
     import TripDisplay from "./TripDisplay.svelte";
 
@@ -8,8 +9,7 @@
 
     async function updateTrip() {
         await fetch(
-            "http://localhost:8000/" + endpoint + args,
-            // "https://api.tungdo.dev/" + endpoint + args,
+            env.PUBLIC_API_HOST + endpoint + args,
             {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
@@ -36,29 +36,43 @@
 />
 
 <div class="stop-container">
-    <div>
+    <div class="stop-name">
         <h3>{stopName}</h3>
     </div>
-    {#each trips as trip}
-        <TripDisplay
-            route_short_name={trip.route_short_name}
-            trip_headsign={trip.trip_headsign}
-            route_color={trip.route_color}
-            time={trip.time}
-        />
-    {/each}
+    <div class="trip-list">
+        {#each trips as trip}
+            <TripDisplay
+                route_short_name={trip.route_short_name}
+                trip_headsign={trip.trip_headsign}
+                route_color={trip.route_color}
+                time={trip.time}
+            />
+        {/each}
+    </div>
 </div>
 
 <style>
-    :global(body) {
-        background-color: #ffffff;
-        color: #000000;
-        /* background-color: #1b1b1b; */
-        /* color: #eeeeee; */
-    }
-
     .stop-container {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 1rem 0.5rem;
+        border: 2px solid #2a2a2a;
+        border-radius: 16px;
+        width: 450px;
+        max-width: 100vw;
+        background-color: #111111;
+        color: #cccccc;
+    }
+
+    .stop-name {
+        padding: 0px 2rem;
+        flex-grow: 1;
+    }
+
+    .trip-list {
+        height: 320px;
+        overflow-y: auto;
     }
 </style>

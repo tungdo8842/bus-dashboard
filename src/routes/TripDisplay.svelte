@@ -38,10 +38,10 @@
     .trip-container {
         display: flex;
         flex-direction: column;
-        border-radius: 8px;
+        border-radius: 16px;
         margin: 8px;
-        max-width: 400px;
-        padding: 0px 8px;
+        width: min(400px, 85vw);
+        padding: 0px 16px;
         background-color: #1a1a1a;
         color: #cccccc;
     }
