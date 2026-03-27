@@ -1,20 +1,22 @@
 <script>
-    let { endpoint, stopName, args = "" } = $props();
+    let {
+        endpoint,
+        stopName,
+        args = "",
+        closable = true,
+        stopClose,
+    } = $props();
     import { env } from "$env/dynamic/public";
     import { onMount } from "svelte";
     import TripDisplay from "./TripDisplay.svelte";
 
     let trips = $state();
-    let trips_snapshot;
 
     async function updateTrip() {
-        await fetch(
-            env.PUBLIC_API_HOST + endpoint + args,
-            {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-            },
-        )
+        await fetch(env.PUBLIC_API_HOST + endpoint + args, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+        })
             .then((response) => response.json())
             .then((data) => {
                 trips = data;
@@ -38,6 +40,9 @@
 <div class="stop-container">
     <div class="stop-name">
         <h3>{stopName}</h3>
+        {#if closable}
+            <button onclick={stopClose}>Close</button>
+        {/if}
     </div>
     <div class="trip-list">
         {#each trips as trip}
@@ -57,7 +62,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin: 1rem 0.5rem;
+        margin: 0.5rem 0.5rem;
         border: 2px solid #2a2a2a;
         border-radius: 16px;
         width: 450px;
@@ -67,12 +72,28 @@
     }
 
     .stop-name {
-        padding: 0px 2rem;
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        align-items: center;
+
+        align-self: stretch;
+        margin: 0 1.5rem;
+    }
+
+    .stop-name h3 {
         flex-grow: 1;
     }
 
+    .stop-name button {
+        flex-grow: 0;
+        color: #cccccc;
+        background-color: #111111;
+        border-radius: 8px;
+    }
+
     .trip-list {
-        height: 320px;
+        height: 240px;
         overflow-y: auto;
     }
 </style>

@@ -2,7 +2,7 @@
     let { route_short_name, trip_headsign, route_color, time } = $props();
 
     // time from the api is in second, not ms, so * 1000 to convert to ms
-    let wait_time = $derived(time * 1000 - Date.now());
+    let waitTime = $derived(time * 1000 - Date.now());
 </script>
 
 <div class="trip-container">
@@ -14,20 +14,28 @@
             <p>{trip_headsign}</p>
         </div>
         <div class="time-info">
-            {#if wait_time <= -60 * 60 * 1000}
+            {#if waitTime <= -60 * 60 * 1000}
                 <p></p>
-            {:else if wait_time <= -60 * 1000}
-                <p>{new Date(Math.abs(wait_time)).getMinutes()} min ago</p>
-            {:else if wait_time <= 60 * 1000}
+            {:else if waitTime <= -60 * 1000}
+                <p>{new Date(Math.abs(waitTime)).getMinutes()} min ago</p>
+            {:else if waitTime <= 60 * 1000}
                 <p>Now</p>
-            {:else if wait_time / 1000 / 60 >= 60}
-                <p>
-                    {new Date(time * 1000).getHours()}:{(
-                        "0" + new Date(time * 1000).getMinutes()
-                    ).slice(-2)}
-                </p>
+            {:else if waitTime / 1000 / 60 >= 60}
+                {#if new Date(time * 1000).getHours() > 12}
+                    <p>
+                        {new Date(time * 1000).getHours() - 12}:{(
+                            "0" + new Date(time * 1000).getMinutes()
+                        ).slice(-2) + " PM"}
+                    </p>
+                {:else}
+                    <p>
+                        {new Date(time * 1000).getHours()}:{(
+                            "0" + new Date(time * 1000).getMinutes()
+                        ).slice(-2) + " AM"}
+                    </p>
+                {/if}
             {:else}
-                <p>{new Date(wait_time).getMinutes()} min</p>
+                <p>{new Date(waitTime).getMinutes()} min</p>
             {/if}
         </div>
     </div>
@@ -38,11 +46,11 @@
     .trip-container {
         display: flex;
         flex-direction: column;
-        border-radius: 16px;
-        margin: 8px;
-        width: min(400px, 85vw);
-        padding: 0px 16px;
-        background-color: #1a1a1a;
+        /* border-radius: 16px; */
+        border-bottom: 1px solid #444444;
+        width: min(400px, 75vw);
+        margin: 0px 16px;
+        /* background-color: #1a1a1a; */
         color: #cccccc;
     }
 
@@ -52,10 +60,10 @@
         flex-direction: row;
     }
 
-    /* for bus number */
     .route-number p {
-        height: 2.4em;
-        width: 2.4em;
+        font-size: 0.8rem;
+        height: 1.6rem;
+        width: 2rem;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -67,15 +75,22 @@
 
     .trip-info {
         flex-grow: 2;
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
     }
 
     .time-info {
         text-align: right;
         width: 5rem;
         flex-grow: 0;
+        display: flex;
+        align-items: center;
+        justify-content: right;
     }
 
     .time-info p {
+        font-size: 0.8rem;
         font-family: sans-serif;
     }
 </style>

@@ -2,56 +2,78 @@
     import { onMount } from "svelte";
     import { env } from "$env/dynamic/public";
     import BusStop from "./BusStop.svelte";
-    let stop_list = $state();
-    let added_stops = $state([]);
-    let stop_select_box;
+    import SearchBox from "./SearchBox.svelte";
+    let stopList = $state();
+    let addedStops = $state({});
+    let searchIsOpened = $state(false);
+    let searchQuery = $state("");
+    let searchResults = $state([]);
+    let searchButton;
 
-    onMount(async () =>{
-        await fetch(
-            env.PUBLIC_API_HOST + "/bus/vic/all_stops",
-            {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-            },
-        )
+
+    onMount(async () => {
+        addedStops = JSON.parse(localStorage.getItem("addedStops") ?? {});
+
+        await fetch(env.PUBLIC_API_HOST + "/bus/vic/all_stops", {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+        })
             .then((response) => response.json())
             .then((data) => {
-                stop_list = data;
+                stopList = data;
             });
+    });
+
+    $effect( () => {
+        localStorage.setItem("addedStops", JSON.stringify(addedStops));
     })
 
-    // change to object/hashmap later
-    function add_stop() {
-        let stop_id = stop_select_box.value;
-        let stop_name = stop_select_box.selectedOptions[0].text;
-        added_stops.push([stop_id, stop_name]);
+    function toggleSearch() {
+        searchIsOpened = true;
+        searchButton.style.visibility = "hidden";
+    }
+
+    function closeSearch() {
+        searchIsOpened = false;
+        searchButton.style.visibility = "visible";
     }
 </script>
 
-<div class="stop-selection">
-    <label for="stop-select">Stop: </label>
-    <select id="stop-select" bind:this={stop_select_box}>
-        {#each stop_list as stop}
-            <option value="{stop[0]}">{stop[1]}</option>
-        {/each}
-    </select>
-    <button onclick={add_stop}>Add Stop</button>
-</div>
+{#if searchIsOpened}
+    <SearchBox
+        bind:searchQuery
+        bind:searchResults
+        bind:addedStops
+        {stopList}
+        {closeSearch}
+    />
+{/if}
 
 <div class="stops-list">
-    <BusStop endpoint="/bus/uvic-departures" stopName="UVic Bus Loop" />
     <BusStop
-        endpoint="/bus/vic/stops?stop_id="
-        stopName="Fort St at Quadra St"
-        args="100064"
+        endpoint="/bus/uvic-departures"
+        stopName="UVic Bus Loop"
+        closable={false}
     />
-    {#each added_stops as stop}
-    <BusStop
-        endpoint="/bus/vic/stops?stop_id="
-        stopName={stop[1]}
-        args={stop[0]}
-    />
+    <!-- <BusStop -->
+    <!--     endpoint="/bus/vic/stops?stop_id=" -->
+    <!--     stopName="Fort St at Quadra St" -->
+    <!--     args="100064" -->
+    <!-- /> -->
+    {#each Object.entries(addedStops) as [key, value]}
+        <BusStop
+            endpoint="/bus/vic/stops?stop_id="
+            stopName={value}
+            args={key}
+            stopClose={() => {
+                delete addedStops[key];
+            }}
+        />
     {/each}
+</div>
+
+<div class="stop-search" bind:this={searchButton}>
+    <button onclick={toggleSearch}>Add new stop</button>
 </div>
 
 <p class="data-source">
@@ -62,10 +84,9 @@
 </p>
 
 <style>
-    .stop-selection {
-        display: block;
+    .stop-search {
         text-align: center;
-        margin: 1rem;
+        flex-grow: 1;
     }
 
     .stops-list {
@@ -73,6 +94,15 @@
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
+        flex-grow: 1;
+    }
+
+    .stop-search button {
+        color: #cccccc;
+        background-color: #111111;
+        border-radius: 8px;
+        padding: 0.5rem;
+        margin: 1rem;
     }
 
     .data-source {
