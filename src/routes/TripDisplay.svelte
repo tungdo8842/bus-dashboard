@@ -14,13 +14,18 @@
             <p>{trip_headsign}</p>
         </div>
         <div class="time-info">
-            {#if waitTime <= -60 * 60 * 1000}
-                <p></p>
-            {:else if waitTime <= -60 * 1000}
-                <p>{new Date(Math.abs(waitTime)).getMinutes()} min ago</p>
-            {:else if waitTime <= 60 * 1000}
-                <p>Now</p>
-            {:else if waitTime / 1000 / 60 >= 60}
+            <div class="time-until-stop">
+                {#if waitTime <= -60 * 60 * 1000}
+                    <p></p>
+                {:else if waitTime <= -60 * 1000}
+                    <p>{new Date(Math.abs(waitTime)).getMinutes()} min ago</p>
+                {:else if waitTime <= 60 * 1000}
+                    <p>Now</p>
+                {:else if waitTime < 60 * 60 * 1000}
+                    <p>{new Date(waitTime).getMinutes()} min</p>
+                {/if}
+            </div>
+            <div class="actual-bus-time">
                 {#if new Date(time * 1000).getHours() > 12}
                     <p>
                         {new Date(time * 1000).getHours() - 12}:{(
@@ -34,12 +39,9 @@
                         ).slice(-2) + " AM"}
                     </p>
                 {/if}
-            {:else}
-                <p>{new Date(waitTime).getMinutes()} min</p>
-            {/if}
+            </div>
         </div>
     </div>
-    <div class="second-row"></div>
 </div>
 
 <style>
@@ -56,8 +58,9 @@
 
     .first-row {
         display: flex;
-        gap: 10px;
         flex-direction: row;
+        align-items: center;
+        gap: 10px;
     }
 
     .route-number p {
@@ -85,12 +88,23 @@
         width: 5rem;
         flex-grow: 0;
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        align-items: right;
         justify-content: right;
     }
 
     .time-info p {
         font-size: 0.8rem;
         font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .time-until-stop {
+        margin-top: 0.2rem
+    }
+    
+    .actual-bus-time {
+        margin-bottom: 0.2rem
     }
 </style>

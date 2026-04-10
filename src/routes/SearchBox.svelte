@@ -10,20 +10,18 @@
         let query = searchQuery.toLowerCase();
         searchResults = stopList.filter((item) => {
             let searchItem = item[1].toLowerCase();
-            let matched = 0;
-            let queryIndex = 0;
-            let itemIndex = 0;
-            let queryLength = query.length;
-            let itemLength = searchItem.length;
+            let matched = 0,
+                queryIndex = 0,
+                itemIndex = 0;
             // increment every character match from left to right
-            while (itemIndex < itemLength && queryIndex < queryLength) {
-                if (query[queryIndex] == searchItem[itemIndex]) {
+            while (itemIndex < searchItem.length && queryIndex < query.length) {
+                if (query[queryIndex] === searchItem[itemIndex]) {
                     matched += 1;
                     queryIndex += 1;
                 }
                 itemIndex += 1;
             }
-            return matched == queryLength;
+            return matched == query.length;
         });
     }
 
@@ -70,7 +68,6 @@
                 bind:value={searchQuery}
                 bind:this={searchInput}
             />
-            <button onclick={closeSearch}>x</button>
         </div>
 
         <div class="search-results">
@@ -86,15 +83,15 @@
 
 <style>
     .search-overlay {
-        position: absolute;
+        position: fixed;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         width: 100vw;
         height: 100vh;
-        top: 0px;
-        left: 0px;
+        /* top: 0px; */
+        /* left: 0px; */
     }
 
     .search-content {
@@ -144,7 +141,9 @@
         flex-grow: 1;
     }
 
-    /* .individual-result button { */
-    /*     height: 1rem; */
-    /* } */
+    @media (max-width: 600px) {
+        .search-input{
+            font-size: 16px;
+        }
+    }
 </style>
