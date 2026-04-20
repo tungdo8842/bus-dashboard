@@ -91,6 +91,7 @@
         flex-direction: column;
         align-items: right;
         justify-content: right;
+        gap: 6px;
     }
 
     .time-info p {

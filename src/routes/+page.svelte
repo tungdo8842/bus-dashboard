@@ -3,17 +3,20 @@
     import { env } from "$env/dynamic/public";
     import BusStop from "./BusStop.svelte";
     import SearchBox from "./SearchBox.svelte";
+
     let stopList = $state();
     let addedStops = $state({});
     let searchIsOpened = $state(false);
     let searchQuery = $state("");
     let searchResults = $state([]);
-    let searchButton;
-
+    let searchButton = $state();
+    let stopListLoaded = $state(false);
 
     onMount(async () => {
-        addedStops = JSON.parse(localStorage.getItem("addedStops") ?? {});
+        // JSON.parse expects strings
+        addedStops = JSON.parse(localStorage.getItem("addedStops") ?? "{}");
 
+        // fetch stop list from api
         await fetch(env.PUBLIC_API_HOST + "/bus/vic/all_stops", {
             method: "GET",
             headers: { "Content-Type": "application/json" },
@@ -21,12 +24,13 @@
             .then((response) => response.json())
             .then((data) => {
                 stopList = data;
+                stopListLoaded = true;
             });
     });
 
-    $effect( () => {
+    $effect(() => {
         localStorage.setItem("addedStops", JSON.stringify(addedStops));
-    })
+    });
 
     function toggleSearch() {
         searchIsOpened = true;
@@ -72,9 +76,11 @@
     {/each}
 </div>
 
-<div class="stop-search" bind:this={searchButton}>
-    <button onclick={toggleSearch}>Add new stop</button>
-</div>
+{#if stopListLoaded}
+    <div class="stop-search" bind:this={searchButton}>
+        <button onclick={toggleSearch}>Add new stop</button>
+    </div>
+{/if}
 
 <p class="data-source">
     Data Source: <a

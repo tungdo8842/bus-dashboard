@@ -30,6 +30,8 @@
         let stopId = parentElem.id.toString();
         let stopName = parentElem.children[0].innerText;
         addedStops[stopId] = stopName;
+
+        e.target.innerText = "Added";
     }
 
     onMount(() => {
