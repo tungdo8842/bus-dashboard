@@ -1,14 +1,18 @@
 from google.transit import gtfs_realtime_pb2
 import requests
 import csv
+import io
+import zipfile
+
 from collections import defaultdict
 from contextlib import asynccontextmanager
+
 import asyncio
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 
-# Data classes
+# Data classes (all strings to use as key:value search)
 class BusRoute():
     def __init__(self, route_id, route_short_name, route_long_name, route_type, route_color, route_text_color):
         self.route_id = route_id
@@ -57,44 +61,8 @@ class DepartureResponse():
         self.time = time
 
 
-
-# read static data
-# keys are in str, not int
-bus_routes = {}
-bus_stops = {}
-bus_trips = {}
-
-with open("./static_data/routes.txt", encoding="utf-8-sig") as file:
-    reader = list(csv.DictReader(file))
-    for route in reader:
-        new_bus_route = BusRoute(route["route_id"], route["route_short_name"], route["route_long_name"], \
-                route["route_type"], route["route_color"], route["route_text_color"])
-        bus_routes[new_bus_route.route_id] = new_bus_route
-
-with open("./static_data/stops.txt", encoding="utf-8-sig") as file:
-    reader = list(csv.DictReader(file))
-    for stop in reader:
-        new_bus_stop = BusStop(stop["stop_id"], stop["stop_name"], stop["stop_lat"], stop["stop_lon"], \
-                stop["wheelchair_boarding"], stop["stop_code"])
-        bus_stops[new_bus_stop.stop_id] = new_bus_stop
-
-with open("./static_data/trips.txt", encoding="utf-8-sig") as file:
-    reader = list(csv.DictReader(file))
-    for trip in reader:
-        new_bus_trip = BusTrip(trip["route_id"], trip["service_id"], trip["trip_id"], trip["trip_headsign"], \
-                trip["shape_id"], trip["block_id"], trip["direction_id"])
-        bus_trips[new_bus_trip.trip_id] = new_bus_trip
-
-
-# reduce stops to id and name
-stops_name_id = []
-for stop_key in bus_stops:
-    stops_name_id.append([bus_stops[stop_key].stop_id, bus_stops[stop_key].stop_name])
-stops_name_id.sort(key=lambda l: l[1])
-
-
 # Feed data processing
-def get_trips_at_stops(feed):
+def get_trips_at_stops(feed, bus_stops, bus_routes, bus_trips):
     """sort all trips into a stop dictionary"""
     trips_by_stop_id = defaultdict(list)
 
@@ -132,9 +100,65 @@ def get_uvic_bus(uvic_bay_list, trips_by_stop_id):
 
     return uvic_trips
 
+# Periodecally update static data
+async def update_static_data(app):
+    new_bus_routes = {}
+    new_bus_stops = {}
+    new_bus_trips = {}
+
+    try: 
+        response = requests.get("https://bct.tmix.se/Tmix.Cap.TdExport.WebApi/gtfs/?operatorIds=48")
+        response.raise_for_status()
+        data = response.content
+
+        with zipfile.ZipFile(io.BytesIO(data)) as zip:
+            with zip.open("routes.txt") as raw_data:
+                reader = list(csv.DictReader(
+                        io.TextIOWrapper(raw_data, encoding="utf-8-sig")
+                    ))
+                for route in reader:
+                    new_bus_route = BusRoute(route["route_id"], route["route_short_name"], route["route_long_name"], \
+                            route["route_type"], route["route_color"], route["route_text_color"])
+                    new_bus_routes[new_bus_route.route_id] = new_bus_route
+
+            with zip.open("stops.txt") as raw_data:
+                reader = list(csv.DictReader(
+                        io.TextIOWrapper(raw_data, encoding="utf-8-sig")
+                    ))
+                for stop in reader:
+                    new_bus_stop = BusStop(stop["stop_id"], stop["stop_name"], stop["stop_lat"], stop["stop_lon"], \
+                            stop["wheelchair_boarding"], stop["stop_code"])
+                    new_bus_stops[new_bus_stop.stop_id] = new_bus_stop
+
+            with zip.open("trips.txt") as raw_data:
+                reader = list(csv.DictReader(
+                        io.TextIOWrapper(raw_data, encoding="utf-8-sig")
+                    ))
+                for trip in reader:
+                    new_bus_trip = BusTrip(trip["route_id"], trip["service_id"], trip["trip_id"], trip["trip_headsign"], \
+                            trip["shape_id"], trip["block_id"], trip["direction_id"])
+                    new_bus_trips[new_bus_trip.trip_id] = new_bus_trip
+
+        app.state.bus_routes = new_bus_routes 
+        app.state.bus_stops = new_bus_stops 
+        app.state.bus_trips = new_bus_trips 
+        # reduce stops to id and name
+        app.state.stops_name_id = []
+        for stop_key in app.state.bus_stops:
+            app.state.stops_name_id.append([app.state.bus_stops[stop_key].stop_id, app.state.bus_stops[stop_key].stop_name])
+        app.state.stops_name_id.sort(key=lambda l: l[1])
+
+    except asyncio.CancelledError:
+        print("Static Data Updater Stopped")
+        raise
+
+async def refresh_static_data(app, sleep_interval = 60*60*24):
+    while True:
+        await asyncio.sleep(sleep_interval)
+        await update_static_data(app)
 
 # Periodically updating data
-async def update_feed_data(app):
+async def update_feed_data(app, sleep_interval = 60):
     # A:4/9, B:14, C:15, G:7, M:39, R:26 (incomplete list)
     app.state.uvic_bay_list = {"A": "101076", "B": "102416", "C": "102417", "G": "100405", "H": "100507", "L": "100858",
                                "M": "100741", "N": "100705", "P": "100878", "Q": "100889", "R": "100904",}
@@ -150,10 +174,10 @@ async def update_feed_data(app):
                 continue
 
             # put all trips into their associated stop
-            app.state.trips_by_stop_id = get_trips_at_stops(app.state.feed)
+            app.state.trips_by_stop_id = get_trips_at_stops(app.state.feed, app.state.bus_stops, app.state.bus_routes, app.state.bus_trips)
             app.state.uvic_trips = get_uvic_bus(app.state.uvic_bay_list, app.state.trips_by_stop_id)
 
-            await asyncio.sleep(60)
+            await asyncio.sleep(sleep_interval)
     except asyncio.CancelledError:
         print("Feed Data Updater Stopped")
         raise
@@ -161,6 +185,8 @@ async def update_feed_data(app):
 
 @asynccontextmanager
 async def lifespan(app):
+    await update_static_data(app)
+    asyncio.create_task(refresh_static_data(app))
     asyncio.create_task(update_feed_data(app))
     yield
 
@@ -197,4 +223,4 @@ async def vic_stop_departures(stop_id):
 
 @app.get("/bus/vic/all_stops")
 async def all_vic_stops():
-    return stops_name_id
+    return app.state.stops_name_id
