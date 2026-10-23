@@ -17,7 +17,7 @@
         addedStops = JSON.parse(localStorage.getItem("addedStops") ?? "{}");
 
         // fetch stop list from api
-        await fetch(env.PUBLIC_API_HOST + "/bus/vic/all_stops", {
+        await fetch(env.PUBLIC_API_HOST + "/vic/all_stops", {
             method: "GET",
             headers: { "Content-Type": "application/json" },
         })
@@ -55,18 +55,18 @@
 
 <div class="stops-list">
     <BusStop
-        endpoint="/bus/uvic-departures"
+        endpoint="/uvic-departures"
         stopName="UVic Bus Loop"
         closable={false}
     />
     <!-- <BusStop -->
-    <!--     endpoint="/bus/vic/stops?stop_id=" -->
+    <!--     endpoint="/vic/stops?stop_id=" -->
     <!--     stopName="Fort St at Quadra St" -->
     <!--     args="100064" -->
     <!-- /> -->
-    {#each Object.entries(addedStops) as [key, value]}
+    {#each Object.entries(addedStops) as [key, value] (key)}
         <BusStop
-            endpoint="/bus/vic/stops?stop_id="
+            endpoint="/vic/stops?stop_id="
             stopName={value}
             args={key}
             stopClose={() => {

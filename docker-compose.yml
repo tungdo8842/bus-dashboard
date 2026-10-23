@@ -1,0 +1,18 @@
+services:
+  bus-dashboard:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      - PUBLIC_API_HOST=${PUBLIC_API_HOST}
+    expose:
+      - "3000"
+
+  transit-fetch:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      - UVICORN_ROOT_PATH=${API_ROOT_PATH:-/bus-api}
+    expose:
+      - "8001"
